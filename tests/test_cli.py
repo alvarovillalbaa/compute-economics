@@ -13,6 +13,9 @@ class CliTests(unittest.TestCase):
         with redirect_stdout(stdout):
             self.assertEqual(main(["estimate-cost", str(example)]), 0)
         self.assertIn("training_flops: 3.720e+17", stdout.getvalue())
+        self.assertIn("wall_clock_hours:", stdout.getvalue())
+        self.assertIn("aggregate_gpu_hours:", stdout.getvalue())
+        self.assertNotIn("raw_gpu_hours:", stdout.getvalue())
         self.assertIn("realistic_cost_usd:", stdout.getvalue())
 
     def test_unreadable_input_reports_failure(self):

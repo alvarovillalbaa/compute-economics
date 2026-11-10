@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "date": "2026-11-10",
+  "previous_manifest": "extraction.json",
+  "previous_packaging_revision": "3086e3262da4bc4700fd3a7e1480b7aba6aa40ca",
+  "source_repository": "alvarovillalbaa/compute-planner",
+  "source_revision": "59258a93f533091df52db57ea06ab5fcd3df9bf2",
+  "initial_snapshot_commit": "dfe6de5e2fea5a5467e3b40a9c255c147c6c5507",
+  "correction": "Explicit price required; elapsed wall-clock and aggregate GPU-hour units separated. Old raw_gpu_hours API removed before first package publication.",
+  "files": [
+    {
+      "source_path": "src/compute_planner/costing.py",
+      "source_sha256": "18d914dca8f9f392a062ae31fd12e740489648d7dd18a061b85b26b5580cebda",
+      "destination_path": "src/compute_economics/costing.py",
+      "destination_sha256": "35ce09d33db8cb5262cf771710b450e4585fe459cb362a3137485ba14e334769",
+      "initial_snapshot_exact": true,
+      "current_relation": "adapted for package imports and reviewed price/hour correction"
+    },
+    {
+      "source_path": "tests/test_costing.py",
+      "source_sha256": "0e701b84932acc177c05d73cd835a0ba5b5859564f15581d7e280f303aa4cc42",
+      "destination_path": "tests/test_costing.py",
+      "destination_sha256": "ebca5c7282c6833ee4006c1a4fdd9cca44962ce3766c1eeff61efb7a5b0eb5bb",
+      "initial_snapshot_exact": true,
+      "current_relation": "adapted for package imports and reviewed price/hour correction"
+    },
+    {
+      "source_path": "examples/estimate.json",
+      "source_sha256": "6cb478a01d83a427fc0e7e495dbfad26dba4232b92f6f1a063597afff6adb7cc",
+      "destination_path": "examples/estimate.json",
+      "destination_sha256": "6cb478a01d83a427fc0e7e495dbfad26dba4232b92f6f1a063597afff6adb7cc",
+      "initial_snapshot_exact": true,
+      "current_relation": "identical"
+    },
+    {
+      "source_path": "templates/cost_ledger.csv",
+      "source_sha256": "171075c49e80f187fbfe6be21e2bbd1f07fc53e865df196b72d9dbc4248344e7",
+      "destination_path": "templates/cost_ledger.csv",
+      "destination_sha256": "171075c49e80f187fbfe6be21e2bbd1f07fc53e865df196b72d9dbc4248344e7",
+      "initial_snapshot_exact": true,
+      "current_relation": "identical"
+    }
+  ],
+  "historical_evidence": "Original extraction manifest and receipt remain unchanged. Their byte-identity claims describe the initial snapshot/packaging revision, not current corrected source."
+}

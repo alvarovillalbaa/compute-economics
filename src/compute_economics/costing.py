@@ -25,7 +25,7 @@ class CostEstimate:
         return FLOPS_PER_PARAM_TOKEN * self.parameters * self.tokens
 
     @property
-    def raw_gpu_hours(self) -> float:
+    def wall_clock_hours(self) -> float:
         sustained_flops_per_hour = (
             self.gpu_count * self.gpu_tflops * 1_000_000_000_000 * 3600 * self.utilization
         )
@@ -34,8 +34,12 @@ class CostEstimate:
         return self.training_flops / sustained_flops_per_hour
 
     @property
+    def aggregate_gpu_hours(self) -> float:
+        return self.wall_clock_hours * self.gpu_count
+
+    @property
     def raw_cost_usd(self) -> float:
-        return self.raw_gpu_hours * self.gpu_count * self.gpu_hourly_usd
+        return self.aggregate_gpu_hours * self.gpu_hourly_usd
 
     @property
     def realistic_cost_usd(self) -> float:
@@ -52,6 +56,8 @@ def estimate_from_spec(spec: dict[str, Any]) -> CostEstimate:
     resources = spec.get("resources", {})
     if resources.get("device") in ("cpu", "mps") or resources.get("gpus", 1) == 0:
         raise ValueError("CPU/MPS workloads are unsupported by the GPU training estimator")
+    if "gpu_hourly_usd" not in resources:
+        raise ValueError("resources.gpu_hourly_usd must be explicitly supplied; use 0 only for an explicit free assumption")
     for key, value in (("parameters", spec.get("model", {}).get("parameters")),
                        ("tokens_target", spec.get("training", {}).get("tokens_target")),
                        ("gpus", resources.get("gpus", 1))):
@@ -59,7 +65,7 @@ def estimate_from_spec(spec: dict[str, Any]) -> CostEstimate:
             raise ValueError(f"{key} must be a positive integer")
     for key, value, allow_zero in (
         ("gpu_tflops", resources.get("gpu_tflops", 82.0), False),
-        ("gpu_hourly_usd", resources.get("gpu_hourly_usd", 0.0), True),
+        ("gpu_hourly_usd", resources["gpu_hourly_usd"], True),
         ("utilization", resources.get("utilization", 0.35), False),
         ("overhead_multiplier", spec.get("budget", {}).get("overhead_multiplier", 2.0), False),
     ):
@@ -77,7 +83,7 @@ def estimate_from_spec(spec: dict[str, Any]) -> CostEstimate:
         tokens=int(training["tokens_target"]),
         gpu_count=int(resources.get("gpus", 1)),
         gpu_tflops=float(resources.get("gpu_tflops", 82.0)),
-        gpu_hourly_usd=float(resources.get("gpu_hourly_usd", 0.0)),
+        gpu_hourly_usd=float(resources["gpu_hourly_usd"]),
         utilization=float(resources.get("utilization", 0.35)),
         overhead_multiplier=float(budget.get("overhead_multiplier", 2.0)),
     )
@@ -88,7 +94,8 @@ def format_estimate(estimate: CostEstimate) -> str:
             f"parameters: {estimate.parameters}",
             f"tokens: {estimate.tokens}",
             f"training_flops: {estimate.training_flops:.3e}",
-            f"raw_gpu_hours: {estimate.raw_gpu_hours:.2f}",
+            f"wall_clock_hours: {estimate.wall_clock_hours:.2f}",
+            f"aggregate_gpu_hours: {estimate.aggregate_gpu_hours:.2f}",
             f"raw_cost_usd: {estimate.raw_cost_usd:.2f}",
             f"realistic_cost_usd: {estimate.realistic_cost_usd:.2f}",
         ]

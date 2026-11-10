@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "date": "2026-11-10",
+  "status": "passed",
+  "package": "compute-economics",
+  "package_version": "0.1.0",
+  "supersedes_source_check": "economics-extraction.json",
+  "correction_source": "3086e3262da4bc4700fd3a7e1480b7aba6aa40ca",
+  "changes": [
+    "Missing resources.gpu_hourly_usd now fails instead of silently becoming free.",
+    "Explicit zero remains a valid free-rate assumption.",
+    "wall_clock_hours reports elapsed time; aggregate_gpu_hours sums usage across GPUs.",
+    "raw_cost_usd uses aggregate GPU-hours times explicit hourly rate.",
+    "raw_gpu_hours property and printed field are removed; no compatibility alias."
+  ],
+  "tests": {
+    "unit-tests": {
+      "exit_code": 0,
+      "output": "test_native_estimate_example_runs_without_planner (test_cli.CliTests.test_native_estimate_example_runs_without_planner) ... ok\ntest_unreadable_input_reports_failure (test_cli.CliTests.test_unreadable_input_reports_failure) ... ok\ntest_estimate_from_spec_has_positive_flops (test_costing.CostingTests.test_estimate_from_spec_has_positive_flops) ... ok\ntest_free_price_requires_explicit_zero (test_costing.CostingTests.test_free_price_requires_explicit_zero) ... ok\ntest_hour_units_for_one_teraflop_gpu_hour_of_work (test_costing.CostingTests.test_hour_units_for_one_teraflop_gpu_hour_of_work) ... ok\ntest_missing_price_is_not_inferred_to_be_free (test_costing.CostingTests.test_missing_price_is_not_inferred_to_be_free) ... ok\ntest_multi_gpu_hours_and_cost_conserve_work_under_linear_scaling (test_costing.CostingTests.test_multi_gpu_hours_and_cost_conserve_work_under_linear_scaling) ... ok\ntest_unsupported_and_nonfinite_inputs_fail (test_costing.CostingTests.test_unsupported_and_nonfinite_inputs_fail) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.005s\n\nOK\n"
+    },
+    "cli": {
+      "exit_code": 0,
+      "output": "parameters: 124000000\ntokens: 500000000\ntraining_flops: 3.720e+17\nwall_clock_hours: 3.60\naggregate_gpu_hours: 3.60\nraw_cost_usd: 2.48\nrealistic_cost_usd: 4.97\n"
+    },
+    "quickstart": {
+      "exit_code": 0,
+      "output": "parameters: 124000000\ntokens: 500000000\ntraining_flops: 3.720e+17\nwall_clock_hours: 3.60\naggregate_gpu_hours: 3.60\nraw_cost_usd: 2.48\nrealistic_cost_usd: 4.97\n"
+    }
+  },
+  "source_hashes": [
+    {
+      "source_path": "src/compute_planner/costing.py",
+      "source_sha256": "18d914dca8f9f392a062ae31fd12e740489648d7dd18a061b85b26b5580cebda",
+      "destination_path": "src/compute_economics/costing.py",
+      "destination_sha256": "35ce09d33db8cb5262cf771710b450e4585fe459cb362a3137485ba14e334769",
+      "initial_snapshot_exact": true,
+      "current_relation": "adapted for package imports and reviewed price/hour correction"
+    },
+    {
+      "source_path": "tests/test_costing.py",
+      "source_sha256": "0e701b84932acc177c05d73cd835a0ba5b5859564f15581d7e280f303aa4cc42",
+      "destination_path": "tests/test_costing.py",
+      "destination_sha256": "ebca5c7282c6833ee4006c1a4fdd9cca44962ce3766c1eeff61efb7a5b0eb5bb",
+      "initial_snapshot_exact": true,
+      "current_relation": "adapted for package imports and reviewed price/hour correction"
+    },
+    {
+      "source_path": "examples/estimate.json",
+      "source_sha256": "6cb478a01d83a427fc0e7e495dbfad26dba4232b92f6f1a063597afff6adb7cc",
+      "destination_path": "examples/estimate.json",
+      "destination_sha256": "6cb478a01d83a427fc0e7e495dbfad26dba4232b92f6f1a063597afff6adb7cc",
+      "initial_snapshot_exact": true,
+      "current_relation": "identical"
+    },
+    {
+      "source_path": "templates/cost_ledger.csv",
+      "source_sha256": "171075c49e80f187fbfe6be21e2bbd1f07fc53e865df196b72d9dbc4248344e7",
+      "destination_path": "templates/cost_ledger.csv",
+      "destination_sha256": "171075c49e80f187fbfe6be21e2bbd1f07fc53e865df196b72d9dbc4248344e7",
+      "initial_snapshot_exact": true,
+      "current_relation": "identical"
+    }
+  ],
+  "proof_scope": "Source-only: existing interpreter with explicit compute-economics source root and external working directory. No builds, installs, provider calls, or planner modifications.",
+  "limits": [
+    "The model assumes identical GPUs with linear scaling and fixed utilization.",
+    "No communication, storage, teacher inference, rollout, actual invoices, or observed provider prices are modeled.",
+    "Fresh package build/install verification is performed centrally by the integration owner."
+  ]
+}
