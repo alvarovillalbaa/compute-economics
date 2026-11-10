@@ -1,6 +1,6 @@
 import unittest
 
-from compute_planner.costing import estimate_from_spec
+from compute_economics.costing import estimate_from_spec
 
 
 class CostingTests(unittest.TestCase):

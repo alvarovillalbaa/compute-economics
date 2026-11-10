@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-10",
+  "source_repository": "alvarovillalbaa/compute-planner",
+  "source_revision": "59258a93f533091df52db57ea06ab5fcd3df9bf2",
+  "destination_repository": "alvarovillalbaa/compute-economics",
+  "original_lab_lineage": {
+    "source_repository": "alvarovillalbaa/lab",
+    "source_revision": "ba67e510bab2703b1042993744ce099490221c1f",
+    "sources": [
+      {
+        "path": "src/lab/costing.py",
+        "destination": "src/compute_planner/costing.py",
+        "source_sha256": "c9e73a328c75c41906a7efecbb340f96dc49ddd78eee52af7678a972156b53b2"
+      },
+      {
+        "path": "tests/test_costing.py",
+        "destination": "tests/test_costing.py",
+        "source_sha256": "b219307a6dd7fb3c7b4225144cdf5a95c02933867a8125ee1d8851fd941e8bbe"
+      },
+      {
+        "path": "reports/templates/cost_ledger.csv",
+        "destination": "templates/cost_ledger.csv",
+        "source_sha256": "313ba7a0c3af5116a1b88a9be174dcc49ff1565ed20b0d19f227aa38dc33cadb"
+      }
+    ]
+  },
+  "files": [
+    {
+      "source_path": "src/compute_planner/costing.py",
+      "source_sha256": "18d914dca8f9f392a062ae31fd12e740489648d7dd18a061b85b26b5580cebda",
+      "destination_path": "src/compute_economics/costing.py",
+      "destination_sha256": "18d914dca8f9f392a062ae31fd12e740489648d7dd18a061b85b26b5580cebda",
+      "initial_snapshot_exact": true,
+      "final_relation": "identical",
+      "initial_snapshot_commit": "dfe6de5e2fea5a5467e3b40a9c255c147c6c5507"
+    },
+    {
+      "source_path": "tests/test_costing.py",
+      "source_sha256": "0e701b84932acc177c05d73cd835a0ba5b5859564f15581d7e280f303aa4cc42",
+      "destination_path": "tests/test_costing.py",
+      "destination_sha256": "af4438214c3c25f87b6fec3d17ff70a4996f39eee75cff07448eccf7cf319945",
+      "initial_snapshot_exact": true,
+      "final_relation": "package import adapted",
+      "initial_snapshot_commit": "dfe6de5e2fea5a5467e3b40a9c255c147c6c5507"
+    },
+    {
+      "source_path": "examples/estimate.json",
+      "source_sha256": "6cb478a01d83a427fc0e7e495dbfad26dba4232b92f6f1a063597afff6adb7cc",
+      "destination_path": "examples/estimate.json",
+      "destination_sha256": "6cb478a01d83a427fc0e7e495dbfad26dba4232b92f6f1a063597afff6adb7cc",
+      "initial_snapshot_exact": true,
+      "final_relation": "identical",
+      "initial_snapshot_commit": "dfe6de5e2fea5a5467e3b40a9c255c147c6c5507"
+    },
+    {
+      "source_path": "templates/cost_ledger.csv",
+      "source_sha256": "171075c49e80f187fbfe6be21e2bbd1f07fc53e865df196b72d9dbc4248344e7",
+      "destination_path": "templates/cost_ledger.csv",
+      "destination_sha256": "171075c49e80f187fbfe6be21e2bbd1f07fc53e865df196b72d9dbc4248344e7",
+      "initial_snapshot_exact": true,
+      "final_relation": "identical",
+      "initial_snapshot_commit": "dfe6de5e2fea5a5467e3b40a9c255c147c6c5507"
+    }
+  ],
+  "history_policy": "Exact initial snapshot precedes packaging. Prior compute-planner historical evidence is retained unchanged. New repository publication is owned by the parent task."
+}

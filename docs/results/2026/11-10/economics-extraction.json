@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-10",
+  "source_repository": "alvarovillalbaa/compute-planner",
+  "source_revision": "59258a93f533091df52db57ea06ab5fcd3df9bf2",
+  "new_package": "compute-economics",
+  "new_package_version": "0.1.0",
+  "planner_version": "0.2.0",
+  "planner_branch": "split/economics",
+  "initial_snapshot_commit": "dfe6de5e2fea5a5467e3b40a9c255c147c6c5507",
+  "verification": {
+    "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]",
+    "files": [
+      {
+        "source_path": "src/compute_planner/costing.py",
+        "source_sha256": "18d914dca8f9f392a062ae31fd12e740489648d7dd18a061b85b26b5580cebda",
+        "destination_path": "src/compute_economics/costing.py",
+        "destination_sha256": "18d914dca8f9f392a062ae31fd12e740489648d7dd18a061b85b26b5580cebda",
+        "initial_snapshot_exact": true,
+        "final_relation": "identical"
+      },
+      {
+        "source_path": "tests/test_costing.py",
+        "source_sha256": "0e701b84932acc177c05d73cd835a0ba5b5859564f15581d7e280f303aa4cc42",
+        "destination_path": "tests/test_costing.py",
+        "destination_sha256": "af4438214c3c25f87b6fec3d17ff70a4996f39eee75cff07448eccf7cf319945",
+        "initial_snapshot_exact": true,
+        "final_relation": "package import adapted"
+      },
+      {
+        "source_path": "examples/estimate.json",
+        "source_sha256": "6cb478a01d83a427fc0e7e495dbfad26dba4232b92f6f1a063597afff6adb7cc",
+        "destination_path": "examples/estimate.json",
+        "destination_sha256": "6cb478a01d83a427fc0e7e495dbfad26dba4232b92f6f1a063597afff6adb7cc",
+        "initial_snapshot_exact": true,
+        "final_relation": "identical"
+      },
+      {
+        "source_path": "templates/cost_ledger.csv",
+        "source_sha256": "171075c49e80f187fbfe6be21e2bbd1f07fc53e865df196b72d9dbc4248344e7",
+        "destination_path": "templates/cost_ledger.csv",
+        "destination_sha256": "171075c49e80f187fbfe6be21e2bbd1f07fc53e865df196b72d9dbc4248344e7",
+        "initial_snapshot_exact": true,
+        "final_relation": "identical"
+      }
+    ],
+    "syntax_metadata_and_dependency_boundaries": "passed"
+  },
+  "checks": {
+    "compute-economics-source-tests": {
+      "exit_code": 0,
+      "output": "test_native_estimate_example_runs_without_planner (test_cli.CliTests.test_native_estimate_example_runs_without_planner) ... ok\ntest_unreadable_input_reports_failure (test_cli.CliTests.test_unreadable_input_reports_failure) ... ok\ntest_estimate_from_spec_has_positive_flops (test_costing.CostingTests.test_estimate_from_spec_has_positive_flops) ... ok\ntest_unsupported_and_nonfinite_inputs_fail (test_costing.CostingTests.test_unsupported_and_nonfinite_inputs_fail) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+    },
+    "compute-planner-source-tests": {
+      "exit_code": 0,
+      "output": "test_economics_api_is_removed_without_a_forwarder (test_cli_boundary.CliBoundaryTests.test_economics_api_is_removed_without_a_forwarder) ... ok\ntest_route_command_retains_native_output (test_cli_boundary.CliBoundaryTests.test_route_command_retains_native_output) ... ok\ntest_policy_order_and_fifo_input (test_scheduling.SchedulingTests.test_policy_order_and_fifo_input) ... ok\ntest_route_example_matches_defaults (test_scheduling.SchedulingTests.test_route_example_matches_defaults) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+    },
+    "economics-cli": {
+      "exit_code": 0,
+      "output": "parameters: 124000000\ntokens: 500000000\ntraining_flops: 3.720e+17\nraw_gpu_hours: 3.60\nraw_cost_usd: 2.48\nrealistic_cost_usd: 4.97\n"
+    },
+    "economics-quickstart": {
+      "exit_code": 0,
+      "output": "parameters: 124000000\ntokens: 500000000\ntraining_flops: 3.720e+17\nraw_gpu_hours: 3.60\nraw_cost_usd: 2.48\nrealistic_cost_usd: 4.97\n"
+    },
+    "planner-route": {
+      "exit_code": 0,
+      "output": "local\nrunpod\nlambda_cloud\n"
+    },
+    "planner-quickstart": {
+      "exit_code": 0,
+      "output": "['local', 'runpod', 'lambda_cloud']\n"
+    }
+  },
+  "method": "Current interpreter, explicit single source root, external working directory. No installed package or sibling import assumed.",
+  "proof_limits": [
+    "No dependency install or package build performed by this extraction task. Central build/install acceptance remains separate.",
+    "Earlier compute-planner 0.1.0 installed receipts are preserved unchanged and do not prove 0.2.0 installation.",
+    "No provider, model, GPU, live pricing, budget enforcement, database, or network service ran."
+  ],
+  "api_removals": [
+    "compute_planner.costing",
+    "compute_planner.CostEstimate",
+    "compute_planner.estimate_from_spec",
+    "compute_planner.format_estimate",
+    "compute-planner estimate-cost"
+  ],
+  "new_api": [
+    "compute_economics.CostEstimate",
+    "compute_economics.estimate_from_spec",
+    "compute_economics.format_estimate",
+    "compute-economics estimate-cost"
+  ],
+  "publication": "Parent task owns GitHub creation, pushes, and PRs.",
+  "receipt_owner": "compute-economics"
+}

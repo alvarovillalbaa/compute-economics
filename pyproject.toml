@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "compute-economics"
+version = "0.1.0"
+description = "Independent workload cost-estimation primitives with explicit caller assumptions."
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/alvarovillalbaa/compute-economics"
+
+[project.scripts]
+compute-economics = "compute_economics.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
