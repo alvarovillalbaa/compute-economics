@@ -1,0 +1,17 @@
+{
+  "model": {
+    "parameters": 124000000
+  },
+  "training": {
+    "tokens_target": 500000000
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_tflops": 82,
+    "gpu_hourly_usd": 0.69,
+    "utilization": 0.35
+  },
+  "budget": {
+    "overhead_multiplier": 2
+  }
+}
